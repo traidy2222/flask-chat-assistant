@@ -24,34 +24,42 @@ def chat():
     # Simulate thinking time
     time.sleep(2)
 
-    # Intermediate steps
-    intermediate_thoughts = [
-        "Hmm, let me think about that...",
-        "Considering different aspects...",
-        "Analyzing the question..."
-    ]
-    for thought in intermediate_thoughts:
-        time.sleep(1)
-        history.append({"role": "assistant", "content": thought})
-        # Notify the UI about the thinking process
-        yield jsonify({"role": "assistant", "content": thought})
+    # Loop for thought and action
+    for _ in range(3):  # Example loop, can be adjusted
+        intermediate_thoughts = [
+            "Hmm, let me think about that...",
+            "Considering different aspects...",
+            "Analyzing the question..."
+        ]
+        for thought in intermediate_thoughts:
+            time.sleep(1)
+            history.append({"role": "assistant", "content": thought})
 
-    completion = client.chat.completions.create(
-        model="QuantFactory/DeepSeek-Coder-V2-Lite-Instruct-GGUF",
-        messages=history,
-        temperature=0.7,
-        stream=True,
-    )
+        completion = client.chat.completions.create(
+            model="QuantFactory/DeepSeek-Coder-V2-Lite-Instruct-GGUF",
+            messages=history,
+            temperature=0.7,
+            stream=True,
+        )
 
-    new_message = {"role": "assistant", "content": ""}
+        new_message = {"role": "assistant", "content": ""}
 
-    for chunk in completion:
-        if chunk.choices[0].delta.content:
-            new_message["content"] += chunk.choices[0].delta.content
+        for chunk in completion:
+            if chunk.choices[0].delta.content:
+                new_message["content"] += chunk.choices[0].delta.content
 
-    history.append(new_message)
-    yield jsonify(new_message)
+        history.append(new_message)
+
+        # Check if an action is needed based on the new message
+        if "action" in new_message["content"].lower():
+            perform_action(new_message["content"])
+
+    return jsonify(new_message)
+
+def perform_action(content):
+    # Implement action handling based on the content
+    print(f"Performing action based on content: {content}")
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    app.run(port=5001)
 
