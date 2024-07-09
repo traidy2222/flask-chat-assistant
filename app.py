@@ -1,6 +1,7 @@
 
 from flask import Flask, request, jsonify, render_template
 from openai import OpenAI
+import time
 
 app = Flask(__name__)
 
@@ -20,6 +21,19 @@ def index():
 def chat():
     user_message = request.json.get('message')
     history.append({"role": "user", "content": user_message})
+
+    # Simulate thinking time
+    time.sleep(2)
+
+    # Intermediate steps
+    intermediate_thoughts = [
+        "Hmm, let me think about that...",
+        "Considering different aspects...",
+        "Analyzing the question..."
+    ]
+    for thought in intermediate_thoughts:
+        time.sleep(1)
+        history.append({"role": "assistant", "content": thought})
 
     completion = client.chat.completions.create(
         model="QuantFactory/DeepSeek-Coder-V2-Lite-Instruct-GGUF",
