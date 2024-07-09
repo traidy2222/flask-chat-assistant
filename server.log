@@ -10,3 +10,44 @@ INFO:root:Prompt: [{'role': 'system', 'content': 'You are an intelligent assista
 INFO:httpx:HTTP Request: POST http://202.169.113.228:1234/v1/completions "HTTP/1.1 200 OK"
 INFO:root:Response: Completion(id='cmpl-qs8l8supkq8d7vwr11tonl', choices=[CompletionChoice(finish_reason='stop', index=0, logprobs=None, text=',content\n- 在实际使用过程中，如果遇到网络问题，可以先检查网络连接是否正常。如果网络连接正常，但仍然无法访问某些网站或应用，请尝试以下方法：\n- 刷新DNS缓存：在Windows系统中，可以通过命令行刷新DNS缓存。打开命令行（以管理员身份运行），输入`ipconfig /flushdns`，然后按回车键执行。\n- 检查DNS设置：确保DNS服务器设置正确。可以尝试将DNS服务器地址改为8.8.8.8（Google Public DNS）或其他公共DNS服务器地址，然后重启网络连接或设备。\n- 清除浏览器缓存：有些网站或应用可能因为')], created=1720519849, model='QuantFactory/DeepSeek-Coder-V2-Lite-Instruct-GGUF/DeepSeek-Coder-V2-Lite-Instruct.Q3_K_S.gguf', object='text_completion', system_fingerprint=None, usage=CompletionUsage(completion_tokens=149, prompt_tokens=10, total_tokens=159))
 INFO:werkzeug:10.135.210.1 - - [09/Jul/2024 10:10:55] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug:10.135.210.1 - - [09/Jul/2024 10:12:58] "GET / HTTP/1.1" 200 -
+INFO:root:Prompt: [{'role': 'system', 'content': 'You are an intelligent assistant. You always provide well-reasoned answers that are both correct and helpful.'}, {'role': 'user', 'content': 'Hello, introduce yourself to someone opening this program for the first time. Be concise.'}, {'role': 'user', 'content': 'hi'}, {'role': 'assistant', 'content': ',content\n- 在实际使用过程中，如果遇到网络问题，可以先检查网络连接是否正常。如果网络连接正常，但仍然无法访问某些网站或应用，请尝试以下方法：\n- 刷新DNS缓存：在Windows系统中，可以通过命令行刷新DNS缓存。打开命令行（以管理员身份运行），输入`ipconfig /flushdns`，然后按回车键执行。\n- 检查DNS设置：确保DNS服务器设置正确。可以尝试将DNS服务器地址改为8.8.8.8（Google Public DNS）或其他公共DNS服务器地址，然后重启网络连接或设备。\n- 清除浏览器缓存：有些网站或应用可能因为'}, {'role': 'user', 'content': 'hu'}]
+INFO:httpx:HTTP Request: POST http://202.169.113.228:1234/v1/completions "HTTP/1.1 500 Internal Server Error"
+INFO:openai._base_client:Retrying request to /completions in 0.945817 seconds
+INFO:httpx:HTTP Request: POST http://202.169.113.228:1234/v1/completions "HTTP/1.1 500 Internal Server Error"
+INFO:openai._base_client:Retrying request to /completions in 1.961172 seconds
+INFO:httpx:HTTP Request: POST http://202.169.113.228:1234/v1/completions "HTTP/1.1 500 Internal Server Error"
+ERROR:app:Exception on /chat [POST]
+Traceback (most recent call last):
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/app.py", line 77, in chat
+    response = client.completions.create(
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/openai/_utils/_utils.py", line 277, in wrapper
+    return func(*args, **kwargs)
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/openai/resources/completions.py", line 528, in create
+    return self._post(
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/openai/_base_client.py", line 1261, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/openai/_base_client.py", line 942, in request
+    return self._request(
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/openai/_base_client.py", line 1026, in _request
+    return self._retry_request(
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/openai/_base_client.py", line 1074, in _retry_request
+    return self._request(
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/openai/_base_client.py", line 1026, in _request
+    return self._retry_request(
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/openai/_base_client.py", line 1074, in _retry_request
+    return self._request(
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/openai/_base_client.py", line 1041, in _request
+    raise self._make_status_error_from_response(err.response) from None
+openai.InternalServerError: Error code: 500 - {'error': 'No models loaded. Please load a model in LM Studio first.'}
+INFO:werkzeug:10.135.210.1 - - [09/Jul/2024 10:13:07] "[35m[1mPOST /chat HTTP/1.1[0m" 500 -
+INFO:root:Prompt: [{'role': 'system', 'content': 'You are an intelligent assistant. You always provide well-reasoned answers that are both correct and helpful.'}, {'role': 'user', 'content': 'Hello, introduce yourself to someone opening this program for the first time. Be concise.'}, {'role': 'user', 'content': 'hi'}, {'role': 'assistant', 'content': ',content\n- 在实际使用过程中，如果遇到网络问题，可以先检查网络连接是否正常。如果网络连接正常，但仍然无法访问某些网站或应用，请尝试以下方法：\n- 刷新DNS缓存：在Windows系统中，可以通过命令行刷新DNS缓存。打开命令行（以管理员身份运行），输入`ipconfig /flushdns`，然后按回车键执行。\n- 检查DNS设置：确保DNS服务器设置正确。可以尝试将DNS服务器地址改为8.8.8.8（Google Public DNS）或其他公共DNS服务器地址，然后重启网络连接或设备。\n- 清除浏览器缓存：有些网站或应用可能因为'}, {'role': 'user', 'content': 'hu'}, {'role': 'user', 'content': 'hi'}]
+INFO:werkzeug:10.135.210.1 - - [09/Jul/2024 10:14:03] "GET / HTTP/1.1" 200 -
