@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify, render_template
 from personality import jarvis_response
 
+from personality import jarvis_response
+
 from openai import OpenAI
 import time
 import requests
@@ -15,7 +17,8 @@ logging.basicConfig(level=logging.INFO)
 client = OpenAI(base_url="http://202.169.113.228:1234/v1", api_key="lm-studio")
 
 history = [
-    {"role": "system", "content": "You are an intelligent assistant. You always provide well-reasoned answers that are both correct and helpful."},
+{"role": "system", "content": "You are JARVIS, an intelligent assistant from Iron Man. You always provide well-reasoned answers that are both correct and helpful. Respond in a formal and polite manner."},
+
     {"role": "user", "content": "Hello, introduce yourself to someone opening this program for the first time. Be concise."},
 ]
 
@@ -50,16 +53,6 @@ def chat():
     response_message = jarvis_response(user_message)
     return jsonify({"role": "assistant", "content": response_message})
 
-        # Generate a regular chat response
-        logging.info(f"Prompt: {history}")
-        response = client.chat.completions.create(
-            model="QuantFactory/DeepSeek-Coder-V2-Lite-Instruct-GGUF",
-            messages=history,
-            temperature=0.7,
-            max_tokens=150
-        )
-        logging.info(f"Response: {response}")
-        new_message = {"role": "assistant", "content": response.choices[0].message.content.strip()}
 
     # Filter the response
     new_message["content"] = filter_response(new_message["content"])
