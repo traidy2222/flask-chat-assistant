@@ -39,32 +39,43 @@ def chat():
     # Simulate thinking time
     time.sleep(2)
 
-    # Generate Thought
-    thought_prompt = f"Thought: I should check the response time for the web page first."
-    history.append({"role": "assistant", "content": thought_prompt})
+    # Check if the message is an action request
+    if "response time" in user_message.lower():
+        # Generate Thought
+        thought_prompt = f"Thought: I should check the response time for the web page first."
+        history.append({"role": "assistant", "content": thought_prompt})
 
-    # Generate Action
-    action_prompt = {
-        "function_name": "get_response_time",
-        "function_params": {
-            "url": "https://learnwithhasan.com"
+        # Generate Action
+        action_prompt = {
+            "function_name": "get_response_time",
+            "function_params": {
+                "url": "https://learnwithhasan.com"
+            }
         }
-    }
-    history.append({"role": "assistant", "content": f"Action: {action_prompt}"})
+        history.append({"role": "assistant", "content": f"Action: {action_prompt}"})
 
-    # Simulate PAUSE
-    time.sleep(2)
+        # Simulate PAUSE
+        time.sleep(2)
 
-    # Execute Action
-    response_time = get_response_time(action_prompt["function_params"]["url"])
+        # Execute Action
+        response_time = get_response_time(action_prompt["function_params"]["url"])
 
-    # Generate Action_Response
-    action_response_prompt = f"Action_Response: {response_time}"
-    history.append({"role": "assistant", "content": action_response_prompt})
+        # Generate Action_Response
+        action_response_prompt = f"Action_Response: {response_time}"
+        history.append({"role": "assistant", "content": action_response_prompt})
 
-    # Generate final Answer
-    final_response = f"Answer: The response time for learnwithhasan.com is {response_time} seconds."
-    new_message = {"role": "assistant", "content": final_response}
+        # Generate final Answer
+        final_response = f"Answer: The response time for learnwithhasan.com is {response_time} seconds."
+        new_message = {"role": "assistant", "content": final_response}
+    else:
+        # Generate a regular chat response
+        response = client.Completion.create(
+            model="QuantFactory/DeepSeek-Coder-V2-Lite-Instruct-GGUF",
+            messages=history,
+            temperature=0.7,
+            max_tokens=150
+        )
+        new_message = {"role": "assistant", "content": response.choices[0].message['content']}
 
     # Filter the response
     new_message["content"] = filter_response(new_message["content"])
