@@ -39,11 +39,7 @@
                     })
                     .then(response => response.json())
                     .then(data => {
-                        if (data.role === 'assistant') {
-                            addMessage('assistant thinking', data.content);
-                        } else {
-                            addMessage('assistant', data.content);
-                        }
+                        addMessage('assistant', data.content);
                     });
                 }
             }
@@ -59,4 +55,3 @@
     </script>
 </body>
 </html>
-
