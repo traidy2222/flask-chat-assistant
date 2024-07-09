@@ -1,9 +1,6 @@
 # This is a test comment to verify commit and push
 from flask import Flask, request, jsonify, render_template
 from personality import jarvis_response
-
-from personality import jarvis_response
-
 from openai import OpenAI
 import time
 import requests
@@ -18,8 +15,7 @@ logging.basicConfig(level=logging.INFO)
 client = OpenAI(base_url="http://202.169.113.228:1234/v1", api_key="lm-studio")
 
 history = [
-{"role": "system", "content": "You are JARVIS, an intelligent assistant from Iron Man. You always provide well-reasoned answers that are both correct and helpful. Respond in a formal and polite manner."},
-
+    {"role": "system", "content": "You are JARVIS, an intelligent assistant from Iron Man. You always provide well-reasoned answers that are both correct and helpful. Respond in a formal and polite manner."},
     {"role": "user", "content": "Hello, introduce yourself to someone opening this program for the first time. Be concise."},
 ]
 
@@ -39,7 +35,6 @@ def get_response_time(url):
 @app.route('/')
 def index():
     return render_template('index.html')
-
 
 @app.route('/start', methods=['GET'])
 def start():
@@ -65,57 +60,5 @@ def chat():
     history.append(new_message)
     return jsonify(new_message)
 
-    # Check if the message is an action request
-
-    user_message = request.json.get('message')
-    response_message = jarvis_response(user_message)
-    return jsonify({"role": "assistant", "content": response_message})
-
-
-    # Filter the response
-    new_message["content"] = filter_response(new_message["content"])
-
-    history.append(new_message)
-    return jsonify(new_message)
-
 if __name__ == '__main__':
     app.run(port=5001)
-
-@app.route('/chat', methods=['POST'])
-@app.route("/chat", methods=["POST"])
-def chat():
-    user_message = request.json.get("message")
-    history.append({"role": "user", "content": user_message})
-
-    # Simulate thinking time
-    time.sleep(2)
-
-    # Generate response using jarvis_response function
-    response_message = jarvis_response(user_message)
-    new_message = {"role": "assistant", "content": response_message}
-
-    # Filter the response
-    new_message["content"] = filter_response(new_message["content"])
-
-    history.append(new_message)
-    return jsonify(new_message)
-
-    # Generate response using jarvis_response function
-    response_message = jarvis_response(user_message)
-    new_message = {'role': 'assistant', 'content': response_message}
-
-    # Filter the response
-    new_message['content'] = filter_response(new_message['content'])
-
-    history.append(new_message)
-    return jsonify(new_message)
-
-
-@app.route('/start', methods=['GET'])
-def start():
-    initial_prompt = 'Introduce yourself to someone opening this program for the first time. Be concise.'
-    response_message = jarvis_response(initial_prompt)
-    initial_message = {'role': 'assistant', 'content': response_message}
-    history.append(initial_message)
-    return jsonify(initial_message)
-
