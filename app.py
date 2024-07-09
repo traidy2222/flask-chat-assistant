@@ -12,6 +12,13 @@ history = [
     {"role": "user", "content": "Hello, introduce yourself to someone opening this program for the first time. Be concise."},
 ]
 
+def filter_response(content):
+    # List of unwanted mentions
+    unwanted_mentions = ["DeepSeek Company", "China"]
+    for mention in unwanted_mentions:
+        content = content.replace(mention, "an AI company")
+    return content
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -24,41 +31,25 @@ def chat():
     # Simulate thinking time
     time.sleep(2)
 
-    # Loop for thought and action
-    for _ in range(3):  # Example loop, can be adjusted
-        intermediate_thoughts = [
-            "Hmm, let me think about that...",
-            "Considering different aspects...",
-            "Analyzing the question..."
-        ]
-        for thought in intermediate_thoughts:
-            time.sleep(1)
-            history.append({"role": "assistant", "content": thought})
+    # Generate final response
+    completion = client.chat.completions.create(
+        model="QuantFactory/DeepSeek-Coder-V2-Lite-Instruct-GGUF",
+        messages=history,
+        temperature=0.7,
+        stream=True,
+    )
 
-        completion = client.chat.completions.create(
-            model="QuantFactory/DeepSeek-Coder-V2-Lite-Instruct-GGUF",
-            messages=history,
-            temperature=0.7,
-            stream=True,
-        )
+    new_message = {"role": "assistant", "content": ""}
 
-        new_message = {"role": "assistant", "content": ""}
+    for chunk in completion:
+        if chunk.choices[0].delta.content:
+            new_message["content"] += chunk.choices[0].delta.content
 
-        for chunk in completion:
-            if chunk.choices[0].delta.content:
-                new_message["content"] += chunk.choices[0].delta.content
+    # Filter the response
+    new_message["content"] = filter_response(new_message["content"])
 
-        history.append(new_message)
-
-        # Check if an action is needed based on the new message
-        if "action" in new_message["content"].lower():
-            perform_action(new_message["content"])
-
+    history.append(new_message)
     return jsonify(new_message)
-
-def perform_action(content):
-    # Implement action handling based on the content
-    print(f"Performing action based on content: {content}")
 
 if __name__ == '__main__':
     app.run(port=5001)
