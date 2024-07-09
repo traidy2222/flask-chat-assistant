@@ -65,3 +65,14 @@
     </script>
 </body>
 </html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/start')
+            .then(response => response.json())
+            .then(data => {
+                addMessage('assistant', data.content);
+            });
+    });
+</script>
+
