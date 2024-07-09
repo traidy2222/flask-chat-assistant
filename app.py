@@ -46,7 +46,7 @@ def chat():
     action_prompt = {
         "function_name": "get_response_time",
         "function_params": {
-            "url": "learnwithhasan.com"
+            "url": "https://learnwithhasan.com"
         }
     }
     history.append({"role": "assistant", "content": f"Action: {action_prompt}"})
