@@ -69,3 +69,22 @@ def chat():
 
 if __name__ == '__main__':
     app.run(port=5001)
+
+@app.route('/chat', methods=['POST'])
+def chat():
+    user_message = request.json.get('message')
+    history.append({'role': 'user', 'content': user_message})
+
+    # Simulate thinking time
+    time.sleep(2)
+
+    # Generate response using jarvis_response function
+    response_message = jarvis_response(user_message)
+    new_message = {'role': 'assistant', 'content': response_message}
+
+    # Filter the response
+    new_message['content'] = filter_response(new_message['content'])
+
+    history.append(new_message)
+    return jsonify(new_message)
+
