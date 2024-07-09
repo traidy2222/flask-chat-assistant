@@ -110,3 +110,12 @@ def chat():
     history.append(new_message)
     return jsonify(new_message)
 
+
+@app.route('/start', methods=['GET'])
+def start():
+    initial_prompt = 'Introduce yourself to someone opening this program for the first time. Be concise.'
+    response_message = jarvis_response(initial_prompt)
+    initial_message = {'role': 'assistant', 'content': response_message}
+    history.append(initial_message)
+    return jsonify(initial_message)
+
