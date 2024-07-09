@@ -39,7 +39,13 @@ def get_response_time(url):
 def index():
     return render_template('index.html')
 
-@app.route('/chat', methods=['POST'])
+
+@app.route('/start', methods=['GET'])
+def start():
+    initial_message = {"role": "assistant", "content": "I am JARVIS, your personal assistant. How may I assist you today?"}
+    history.append(initial_message)
+    return jsonify(initial_message)
+
 def chat():
     user_message = request.json.get('message')
     history.append({"role": "user", "content": user_message})
