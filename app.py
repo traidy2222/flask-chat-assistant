@@ -1,4 +1,6 @@
 from flask import Flask, request, jsonify, render_template
+from personality import jarvis_response
+
 from openai import OpenAI
 import time
 import requests
@@ -43,34 +45,11 @@ def chat():
     time.sleep(2)
 
     # Check if the message is an action request
-    if "response time" in user_message.lower():
-        # Generate Thought
-        thought_prompt = f"Thought: I should check the response time for the web page first."
-        history.append({"role": "assistant", "content": thought_prompt})
 
-        # Generate Action
-        action_prompt = {
-            "function_name": "get_response_time",
-            "function_params": {
-                "url": "https://learnwithhasan.com"
-            }
-        }
-        history.append({"role": "assistant", "content": f"Action: {action_prompt}"})
+    user_message = request.json.get('message')
+    response_message = jarvis_response(user_message)
+    return jsonify({"role": "assistant", "content": response_message})
 
-        # Simulate PAUSE
-        time.sleep(2)
-
-        # Execute Action
-        response_time = get_response_time(action_prompt["function_params"]["url"])
-
-        # Generate Action_Response
-        action_response_prompt = f"Action_Response: {response_time}"
-        history.append({"role": "assistant", "content": action_response_prompt})
-
-        # Generate final Answer
-        final_response = f"Answer: The response time for learnwithhasan.com is {response_time} seconds."
-        new_message = {"role": "assistant", "content": final_response}
-    else:
         # Generate a regular chat response
         logging.info(f"Prompt: {history}")
         response = client.chat.completions.create(
