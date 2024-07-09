@@ -69,7 +69,7 @@ def chat():
         new_message = {"role": "assistant", "content": final_response}
     else:
         # Generate a regular chat response
-        response = client.Completion.create(
+        response = client.completions.create(
             model="QuantFactory/DeepSeek-Coder-V2-Lite-Instruct-GGUF",
             messages=history,
             temperature=0.7,
