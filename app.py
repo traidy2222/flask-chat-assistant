@@ -3,8 +3,12 @@ from flask import Flask, request, jsonify, render_template
 from openai import OpenAI
 import time
 import requests
+import logging
 
 app = Flask(__name__)
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
 
 # Point to the local server
 client = OpenAI(base_url="http://202.169.113.228:1234/v1", api_key="lm-studio")
@@ -69,12 +73,14 @@ def chat():
         new_message = {"role": "assistant", "content": final_response}
     else:
         # Generate a regular chat response
+        logging.info(f"Prompt: {history}")
         response = client.completions.create(
             model="QuantFactory/DeepSeek-Coder-V2-Lite-Instruct-GGUF",
             prompt=history,
             temperature=0.7,
             max_tokens=150
         )
+        logging.info(f"Response: {response}")
         new_message = {"role": "assistant", "content": response.choices[0].text}
 
     # Filter the response
