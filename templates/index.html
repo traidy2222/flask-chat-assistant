@@ -9,10 +9,10 @@
         .chat-container { max-width: 600px; margin: 0 auto; padding: 20px; }
         .chat-box { border: 1px solid #ccc; padding: 10px; height: 400px; overflow-y: scroll; }
         .chat-input { width: 100%; padding: 10px; margin-top: 10px; }
-        .message { margin: 10px 0; }
-        .message.user { text-align: right; }
-        .message.assistant { text-align: left; }
-        .thinking { color: gray; font-style: italic; }
+        .message { margin: 10px 0; padding: 10px; border-radius: 5px; }
+        .message.user { text-align: right; background-color: #e0f7fa; }
+        .message.assistant { text-align: left; background-color: #f1f8e9; }
+        .message-label { font-weight: bold; margin-bottom: 5px; }
     </style>
 </head>
 <body>
@@ -48,7 +48,17 @@
         function addMessage(role, content) {
             const messageDiv = document.createElement('div');
             messageDiv.classList.add('message', role);
-            messageDiv.textContent = content;
+
+            const labelDiv = document.createElement('div');
+            labelDiv.classList.add('message-label');
+            labelDiv.textContent = role === 'user' ? 'User' : 'Assistant';
+
+            const contentDiv = document.createElement('div');
+            contentDiv.textContent = content;
+
+            messageDiv.appendChild(labelDiv);
+            messageDiv.appendChild(contentDiv);
+
             chatBox.appendChild(messageDiv);
             chatBox.scrollTop = chatBox.scrollHeight;
         }
