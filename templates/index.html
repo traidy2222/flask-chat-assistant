@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with Intelligent Assistant</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .chat-container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .chat-box { border: 1px solid #ccc; padding: 10px; height: 400px; overflow-y: scroll; }
+        .chat-input { width: 100%; padding: 10px; margin-top: 10px; }
+        .message { margin: 10px 0; }
+        .message.user { text-align: right; }
+        .message.assistant { text-align: left; }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <h1>Chat with Intelligent Assistant</h1>
+        <div class="chat-box" id="chat-box"></div>
+        <input type="text" id="chat-input" class="chat-input" placeholder="Type your message here...">
+    </div>
+
+    <script>
+        const chatBox = document.getElementById('chat-box');
+        const chatInput = document.getElementById('chat-input');
+
+        chatInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                const userMessage = chatInput.value;
+                if (userMessage.trim() !== '') {
+                    addMessage('user', userMessage);
+                    chatInput.value = '';
+                    fetch('/chat', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ message: userMessage })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        addMessage('assistant', data.content);
+                    });
+                }
+            }
+        });
+
+        function addMessage(role, content) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', role);
+            messageDiv.textContent = content;
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>
+
