@@ -1,4 +1,3 @@
-
 from flask import Flask, request, jsonify, render_template
 from openai import OpenAI
 import time
@@ -34,6 +33,8 @@ def chat():
     for thought in intermediate_thoughts:
         time.sleep(1)
         history.append({"role": "assistant", "content": thought})
+        # Notify the UI about the thinking process
+        yield jsonify({"role": "assistant", "content": thought})
 
     completion = client.chat.completions.create(
         model="QuantFactory/DeepSeek-Coder-V2-Lite-Instruct-GGUF",
@@ -49,7 +50,7 @@ def chat():
             new_message["content"] += chunk.choices[0].delta.content
 
     history.append(new_message)
-    return jsonify(new_message)
+    yield jsonify(new_message)
 
 if __name__ == '__main__':
     app.run(port=5000)

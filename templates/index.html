@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +12,7 @@
         .message { margin: 10px 0; }
         .message.user { text-align: right; }
         .message.assistant { text-align: left; }
+        .thinking { color: gray; font-style: italic; }
     </style>
 </head>
 <body>
@@ -39,7 +39,11 @@
                     })
                     .then(response => response.json())
                     .then(data => {
-                        addMessage('assistant', data.content);
+                        if (data.role === 'assistant') {
+                            addMessage('assistant thinking', data.content);
+                        } else {
+                            addMessage('assistant', data.content);
+                        }
                     });
                 }
             }
