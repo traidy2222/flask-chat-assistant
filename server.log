@@ -5,19 +5,62 @@ INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a
  * Running on http://127.0.0.1:5000
  * Running on http://169.254.0.21:5000
 INFO:werkzeug:[33mPress CTRL+C to quit[0m
-INFO:werkzeug:10.135.210.1 - - [09/Jul/2024 10:10:45] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:10.135.210.1 - - [09/Jul/2024 10:17:09] "GET / HTTP/1.1" 200 -
 INFO:root:Prompt: [{'role': 'system', 'content': 'You are an intelligent assistant. You always provide well-reasoned answers that are both correct and helpful.'}, {'role': 'user', 'content': 'Hello, introduce yourself to someone opening this program for the first time. Be concise.'}, {'role': 'user', 'content': 'hi'}]
 INFO:httpx:HTTP Request: POST http://202.169.113.228:1234/v1/completions "HTTP/1.1 200 OK"
-INFO:root:Response: Completion(id='cmpl-qs8l8supkq8d7vwr11tonl', choices=[CompletionChoice(finish_reason='stop', index=0, logprobs=None, text=',content\n- 在实际使用过程中，如果遇到网络问题，可以先检查网络连接是否正常。如果网络连接正常，但仍然无法访问某些网站或应用，请尝试以下方法：\n- 刷新DNS缓存：在Windows系统中，可以通过命令行刷新DNS缓存。打开命令行（以管理员身份运行），输入`ipconfig /flushdns`，然后按回车键执行。\n- 检查DNS设置：确保DNS服务器设置正确。可以尝试将DNS服务器地址改为8.8.8.8（Google Public DNS）或其他公共DNS服务器地址，然后重启网络连接或设备。\n- 清除浏览器缓存：有些网站或应用可能因为')], created=1720519849, model='QuantFactory/DeepSeek-Coder-V2-Lite-Instruct-GGUF/DeepSeek-Coder-V2-Lite-Instruct.Q3_K_S.gguf', object='text_completion', system_fingerprint=None, usage=CompletionUsage(completion_tokens=149, prompt_tokens=10, total_tokens=159))
-INFO:werkzeug:10.135.210.1 - - [09/Jul/2024 10:10:55] "POST /chat HTTP/1.1" 200 -
-INFO:werkzeug:10.135.210.1 - - [09/Jul/2024 10:12:58] "GET / HTTP/1.1" 200 -
-INFO:root:Prompt: [{'role': 'system', 'content': 'You are an intelligent assistant. You always provide well-reasoned answers that are both correct and helpful.'}, {'role': 'user', 'content': 'Hello, introduce yourself to someone opening this program for the first time. Be concise.'}, {'role': 'user', 'content': 'hi'}, {'role': 'assistant', 'content': ',content\n- 在实际使用过程中，如果遇到网络问题，可以先检查网络连接是否正常。如果网络连接正常，但仍然无法访问某些网站或应用，请尝试以下方法：\n- 刷新DNS缓存：在Windows系统中，可以通过命令行刷新DNS缓存。打开命令行（以管理员身份运行），输入`ipconfig /flushdns`，然后按回车键执行。\n- 检查DNS设置：确保DNS服务器设置正确。可以尝试将DNS服务器地址改为8.8.8.8（Google Public DNS）或其他公共DNS服务器地址，然后重启网络连接或设备。\n- 清除浏览器缓存：有些网站或应用可能因为'}, {'role': 'user', 'content': 'hu'}]
-INFO:httpx:HTTP Request: POST http://202.169.113.228:1234/v1/completions "HTTP/1.1 500 Internal Server Error"
-INFO:openai._base_client:Retrying request to /completions in 0.945817 seconds
-INFO:httpx:HTTP Request: POST http://202.169.113.228:1234/v1/completions "HTTP/1.1 500 Internal Server Error"
-INFO:openai._base_client:Retrying request to /completions in 1.961172 seconds
-INFO:httpx:HTTP Request: POST http://202.169.113.228:1234/v1/completions "HTTP/1.1 500 Internal Server Error"
+INFO:root:Response: Completion(id='cmpl-ti3e73nnwgc0els7ow4nyiw', choices=[CompletionChoice(finish_reason='stop', index=0, logprobs=None, text=' role,content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role,')], created=1720520232, model='QuantFactory/Meta-Llama-3-8B-Instruct-function-calling-json-mode-GGUF/Meta-Llama-3-8B-Instruct-function-calling-json-mode.Q6_K.gguf', object='text_completion', system_fingerprint=None, usage=CompletionUsage(completion_tokens=100, prompt_tokens=6, total_tokens=106))
+INFO:werkzeug:10.135.210.1 - - [09/Jul/2024 10:17:26] "POST /chat HTTP/1.1" 200 -
+INFO:werkzeug:10.135.210.1 - - [09/Jul/2024 10:17:31] "GET / HTTP/1.1" 200 -
+INFO:root:Prompt: [{'role': 'system', 'content': 'You are an intelligent assistant. You always provide well-reasoned answers that are both correct and helpful.'}, {'role': 'user', 'content': 'Hello, introduce yourself to someone opening this program for the first time. Be concise.'}, {'role': 'user', 'content': 'hi'}, {'role': 'assistant', 'content': 'role,content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role, content role,'}, {'role': 'user', 'content': 'hi'}]
+INFO:openai._base_client:Retrying request to /completions in 0.824510 seconds
+INFO:openai._base_client:Retrying request to /completions in 1.701046 seconds
 ERROR:app:Exception on /chat [POST]
+Traceback (most recent call last):
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/httpx/_transports/default.py", line 69, in map_httpcore_exceptions
+    yield
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/httpx/_transports/default.py", line 233, in handle_request
+    resp = self._pool.handle_request(req)
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/httpcore/_sync/connection_pool.py", line 216, in handle_request
+    raise exc from None
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/httpcore/_sync/connection_pool.py", line 196, in handle_request
+    response = connection.handle_request(
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/httpcore/_sync/connection.py", line 99, in handle_request
+    raise exc
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/httpcore/_sync/connection.py", line 76, in handle_request
+    stream = self._connect(request)
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/httpcore/_sync/connection.py", line 122, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/httpcore/_backends/sync.py", line 205, in connect_tcp
+    with map_exceptions(exc_map):
+  File "/usr/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectTimeout: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/openai/_base_client.py", line 973, in _request
+    response = self._client.send(
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/httpx/_client.py", line 914, in send
+    response = self._send_handling_auth(
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/httpx/_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/httpx/_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/httpx/_client.py", line 1015, in _send_single_request
+    response = transport.handle_request(request)
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/httpx/_transports/default.py", line 232, in handle_request
+    with map_httpcore_exceptions():
+  File "/usr/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/httpx/_transports/default.py", line 86, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectTimeout: timed out
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
   File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/flask/app.py", line 1473, in wsgi_app
     response = self.full_dispatch_request()
@@ -37,20 +80,15 @@ Traceback (most recent call last):
     return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
   File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/openai/_base_client.py", line 942, in request
     return self._request(
-  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/openai/_base_client.py", line 1026, in _request
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/openai/_base_client.py", line 982, in _request
     return self._retry_request(
   File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/openai/_base_client.py", line 1074, in _retry_request
     return self._request(
-  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/openai/_base_client.py", line 1026, in _request
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/openai/_base_client.py", line 982, in _request
     return self._retry_request(
   File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/openai/_base_client.py", line 1074, in _retry_request
     return self._request(
-  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/openai/_base_client.py", line 1041, in _request
-    raise self._make_status_error_from_response(err.response) from None
-openai.InternalServerError: Error code: 500 - {'error': 'No models loaded. Please load a model in LM Studio first.'}
-INFO:werkzeug:10.135.210.1 - - [09/Jul/2024 10:13:07] "[35m[1mPOST /chat HTTP/1.1[0m" 500 -
-INFO:root:Prompt: [{'role': 'system', 'content': 'You are an intelligent assistant. You always provide well-reasoned answers that are both correct and helpful.'}, {'role': 'user', 'content': 'Hello, introduce yourself to someone opening this program for the first time. Be concise.'}, {'role': 'user', 'content': 'hi'}, {'role': 'assistant', 'content': ',content\n- 在实际使用过程中，如果遇到网络问题，可以先检查网络连接是否正常。如果网络连接正常，但仍然无法访问某些网站或应用，请尝试以下方法：\n- 刷新DNS缓存：在Windows系统中，可以通过命令行刷新DNS缓存。打开命令行（以管理员身份运行），输入`ipconfig /flushdns`，然后按回车键执行。\n- 检查DNS设置：确保DNS服务器设置正确。可以尝试将DNS服务器地址改为8.8.8.8（Google Public DNS）或其他公共DNS服务器地址，然后重启网络连接或设备。\n- 清除浏览器缓存：有些网站或应用可能因为'}, {'role': 'user', 'content': 'hu'}, {'role': 'user', 'content': 'hi'}]
-INFO:werkzeug:10.135.210.1 - - [09/Jul/2024 10:14:03] "GET / HTTP/1.1" 200 -
-INFO:httpx:HTTP Request: POST http://202.169.113.228:1234/v1/completions "HTTP/1.1 200 OK"
-INFO:root:Response: Completion(id='cmpl-tzjeu1uxzksi08lraiqojo', choices=[CompletionChoice(finish_reason='stop', index=0, logprobs=None, text=' role,content role,content role,content role,content role,content role,content role,content role,content role,content role role,content role,content role,content role,content role,content role,content role,content role,content role,content role')], created=1720520011, model='mradermacher/Karasu-Mixtral-8x22B-v0.1-i1-GGUF/Karasu-Mixtral-8x22B-v0.1.i1-IQ1_S.gguf', object='text_completion', system_fingerprint=None, usage=CompletionUsage(completion_tokens=29, prompt_tokens=0, total_tokens=29))
-INFO:werkzeug:10.135.210.1 - - [09/Jul/2024 10:15:09] "POST /chat HTTP/1.1" 200 -
+  File "/home/user/flask-chat-assistant/flask-chat-assistant/venv/lib/python3.10/site-packages/openai/_base_client.py", line 992, in _request
+    raise APITimeoutError(request=request) from err
+openai.APITimeoutError: Request timed out.
+INFO:werkzeug:10.135.210.1 - - [09/Jul/2024 10:17:56] "[35m[1mPOST /chat HTTP/1.1[0m" 500 -
