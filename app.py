@@ -76,7 +76,7 @@ def chat():
         logging.info(f"Prompt: {history}")
         response = client.completions.create(
             model="QuantFactory/DeepSeek-Coder-V2-Lite-Instruct-GGUF",
-            prompt=history,
+            prompt=[{"role": "user", "content": user_message}],
             temperature=0.7,
             max_tokens=150
         )
