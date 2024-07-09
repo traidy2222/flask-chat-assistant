@@ -1,4 +1,3 @@
-
 from flask import Flask, request, jsonify, render_template
 from openai import OpenAI
 import time
@@ -74,14 +73,14 @@ def chat():
     else:
         # Generate a regular chat response
         logging.info(f"Prompt: {history}")
-        response = client.completions.create(
+        response = client.chat.completions.create(
             model="QuantFactory/DeepSeek-Coder-V2-Lite-Instruct-GGUF",
-            prompt=history,
+            messages=history,
             temperature=0.7,
             max_tokens=150
         )
         logging.info(f"Response: {response}")
-        new_message = {"role": "assistant", "content": response.choices[0].text.strip()}
+        new_message = {"role": "assistant", "content": response.choices[0].message.content.strip()}
 
     # Filter the response
     new_message["content"] = filter_response(new_message["content"])
@@ -91,4 +90,3 @@ def chat():
 
 if __name__ == '__main__':
     app.run(port=5001)
-
