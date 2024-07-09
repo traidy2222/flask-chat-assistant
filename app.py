@@ -71,11 +71,11 @@ def chat():
         # Generate a regular chat response
         response = client.completions.create(
             model="QuantFactory/DeepSeek-Coder-V2-Lite-Instruct-GGUF",
-            messages=history,
+            prompt=history,
             temperature=0.7,
             max_tokens=150
         )
-        new_message = {"role": "assistant", "content": response.choices[0].message['content']}
+        new_message = {"role": "assistant", "content": response.choices[0].text}
 
     # Filter the response
     new_message["content"] = filter_response(new_message["content"])
