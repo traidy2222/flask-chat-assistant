@@ -76,12 +76,12 @@ def chat():
         logging.info(f"Prompt: {history}")
         response = client.completions.create(
             model="QuantFactory/DeepSeek-Coder-V2-Lite-Instruct-GGUF",
-            prompt=[{"role": "user", "content": user_message}],
+            prompt=history,
             temperature=0.7,
             max_tokens=150
         )
         logging.info(f"Response: {response}")
-        new_message = {"role": "assistant", "content": response.choices[0].text}
+        new_message = {"role": "assistant", "content": response.choices[0].text.strip()}
 
     # Filter the response
     new_message["content"] = filter_response(new_message["content"])
